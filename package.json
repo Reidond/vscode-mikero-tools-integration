@@ -1,0 +1,97 @@
+{
+	"name": "vscode-mikero-tools-integration",
+	"displayName": "VSCode Mikero Tools Integration",
+	"description": "Itegrate mikero tools into VSCode and do not leave your editor no more",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.35.0"
+	},
+	"categories": [ "Other" ],
+	"activationEvents": [
+		"onCommand:pboActions.makePbo",
+		"onCommand:pboActions.extractPboDos",
+		"onCommand:configActions.deRapDos",
+		"onCommand:configActions.rapify"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "pboActions.makePbo",
+				"title": "Make Pbo",
+				"category": "Mikero Tools"
+			},
+			{
+				"command": "pboActions.extractPboDos",
+				"title": "Extract Pbo",
+				"category": "Mikero Tools"
+			},
+			{
+				"command": "configActions.deRapDos",
+				"title": "De Rap",
+				"category": "Mikero Tools"
+			},
+			{
+				"command": "configActions.rapify",
+				"title": "Rapify",
+				"category": "Mikero Tools"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "pboActions.makePbo",
+					"when": "explorerResourceIsFolder",
+					"group": "7_modification"
+				},
+				{
+					"command": "pboActions.extractPboDos",
+					"when": "explorerResourceIsFolder",
+					"group": "7_modification"
+				},
+				{
+					"command": "configActions.deRapDos",
+					"when": "resourceExtname == .bin",
+					"group": "7_modification"
+				},
+				{
+					"command": "configActions.rapify",
+					"when": "resourceExtname == .cpp",
+					"group": "7_modification"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "pboActions.makePbo",
+					"when": "false"
+				},
+				{
+					"command": "pboActions.extractPboDos",
+					"when": "false"
+				},
+				{
+					"command": "configActions.deRapDos",
+					"when": "false"
+				},
+				{
+					"command": "configActions.rapify",
+					"when": "false"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28",
+		"tslint": "^5.12.1",
+		"@types/node": "^10.12.21",
+		"@types/mocha": "^2.2.42"
+	}
+}
