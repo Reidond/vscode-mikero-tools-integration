@@ -2,7 +2,7 @@
 
 ## Features
 
-This extension add context menu actions for Mikero Tools. Super useful when you do not want to switch beetwen or write scripts when building your mods
+This extension add context menu actions for Mikero Tools. Super useful when you do not want to switch beetwen terminal and editor or write scripts when building your mods
 
 ## Requirements
 
