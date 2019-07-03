@@ -1,7 +1,7 @@
 {
 	"name": "vscode-mikero-tools-integration",
 	"displayName": "VSCode Mikero Tools Integration",
-	"description": "Itegrate mikero tools into VSCode and do not leave your editor no more",
+	"description": "Integrate mikero tools into VSCode and do not leave your editor no more",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.35.0"
