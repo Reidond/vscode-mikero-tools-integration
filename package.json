@@ -46,7 +46,7 @@
 				},
 				{
 					"command": "pboActions.extractPboDos",
-					"when": "explorerResourceIsFolder",
+					"when": "resourceExtname == .pbo",
 					"group": "7_modification"
 				},
 				{
