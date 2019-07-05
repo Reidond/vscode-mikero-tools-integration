@@ -16,7 +16,34 @@ enum TypeOfCommand {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Congratulations, your extension "vscode-mikero-tools-integration" is now active!');
+	const config = vscode.workspace.getConfiguration('vscode-mikero-tools-integration');
+	context.subscriptions.push(
+		vscode.commands.registerCommand('pboActions.makePbo', (dir: vscode.Uri) => {
+			let commandObj = checkIfUsingBundled(context, TypeOfCommand.MakePbo, dir, config);
+			runMikeroToolsFromPowershell(commandObj);
+		})
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand('pboActions.extractPboDos', (dir: vscode.Uri) => {
+			let commandObj = checkIfUsingBundled(context, TypeOfCommand.ExtractPboDos, dir, config);
+			runMikeroToolsFromPowershell(commandObj);
+		})
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand('configActions.deRapDos', (dir: vscode.Uri) => {
+			let commandObj = checkIfUsingBundled(context, TypeOfCommand.DeRapDos, dir, config);
+			runMikeroToolsFromPowershell(commandObj);
+		})
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand('configActions.rapify', (dir: vscode.Uri) => {
+			let commandObj = checkIfUsingBundled(context, TypeOfCommand.Rapify, dir, config);
+			runMikeroToolsFromPowershell(commandObj);
+		})
+	);
+}
+
+export function deactivate() {}
 
 function runMikeroToolsFromPowershell(commandObj: Command) {
 	const ps = new Shell({
@@ -35,7 +62,89 @@ function runMikeroToolsFromPowershell(commandObj: Command) {
 	});
 }
 
-	context.subscriptions.push(disposable);
+function getDefaultPathCommand(
+	typeOfCommand: TypeOfCommand,
+	dir: vscode.Uri | undefined,
+	config: vscode.WorkspaceConfiguration
+): Command {
+	switch (typeOfCommand) {
+		case TypeOfCommand.MakePbo:
+			return { program: config.get('makePboPath'), options: config.get('makePboOptions'), filePath: dir };
+
+		case TypeOfCommand.ExtractPboDos:
+			return {
+				program: config.get('extractPboDosPath'),
+				options: config.get('extractPboDosOptions'),
+				filePath: dir
+			};
+
+		case TypeOfCommand.DeRapDos:
+			return {
+				program: config.get('deRapDosPath'),
+				options: config.get('deRapDosOptions'),
+				filePath: dir
+			};
+
+		case TypeOfCommand.Rapify:
+			return {
+				program: config.get('rapifyPath'),
+				options: config.get('rapifyOptions'),
+				filePath: dir
+			};
+
+		default:
+			return { program: undefined, options: undefined, filePath: undefined };
+	}
 }
 
-export function deactivate() {}
+function getBundledPathCommand(
+	typeOfCommand: TypeOfCommand,
+	dir: vscode.Uri | undefined,
+	context: vscode.ExtensionContext
+): Command {
+	const bundledPath = `${context.extensionPath}\\bin`;
+	switch (typeOfCommand) {
+		case TypeOfCommand.MakePbo:
+			return {
+				program: `${bundledPath}\\MakePbo.exe`,
+				options: '-X none -U',
+				filePath: dir
+			};
+
+		case TypeOfCommand.ExtractPboDos:
+			return {
+				program: `${bundledPath}\\ExtractPboDos.exe`,
+				options: '',
+				filePath: dir
+			};
+
+		case TypeOfCommand.DeRapDos:
+			return {
+				program: `${bundledPath}\\DeRapDos.exe`,
+				options: '',
+				filePath: dir
+			};
+
+		case TypeOfCommand.Rapify:
+			return {
+				program: `${bundledPath}\\Rapify.exe`,
+				options: '',
+				filePath: dir
+			};
+
+		default:
+			return { program: undefined, options: undefined, filePath: undefined };
+	}
+}
+
+function checkIfUsingBundled(
+	context: vscode.ExtensionContext,
+	typeOfCommand: TypeOfCommand,
+	dir: vscode.Uri | undefined,
+	config: vscode.WorkspaceConfiguration
+): Command {
+	if (config.get('useBundled') === true) {
+		return getBundledPathCommand(typeOfCommand, dir, context);
+	}
+	return getDefaultPathCommand(typeOfCommand, dir, config);
+}
