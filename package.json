@@ -20,8 +20,8 @@
 				"title": "Mikero Tools Configuration",
 				"properties": {
 					"vscode-mikero-tools-integration.useBundled": {
-						"type": "string",
-						"default": "MakePbo.exe",
+						"type": "boolean",
+						"default": true,
 						"description": "Flag for using bundled version of old tools. This for best experience, because newer versions does not have some options"
 					},
 					"vscode-mikero-tools-integration.makePboPath": {
@@ -54,12 +54,12 @@
 						"default": "",
 						"description": "Options for DeRapDos executable."
 					},
-					"vscode-mikero-tools-integration.RapifyPath": {
+					"vscode-mikero-tools-integration.rapifyPath": {
 						"type": "string",
 						"default": "Rapify.exe",
 						"description": "Path to Rapify executable. Default is from PATH"
 					},
-					"vscode-mikero-tools-integration.RapifyOptions": {
+					"vscode-mikero-tools-integration.rapifyOptions": {
 						"type": "string",
 						"default": "",
 						"description": "Options for Rapify executable."

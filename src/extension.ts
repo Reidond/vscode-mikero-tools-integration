@@ -59,7 +59,7 @@ function runMikeroToolsFromPowershell(commandObj: Command) {
 		.catch((err: any) => {
 			vscode.window.showInformationMessage(err);
 			ps.dispose();
-	});
+		});
 }
 
 function getDefaultPathCommand(
