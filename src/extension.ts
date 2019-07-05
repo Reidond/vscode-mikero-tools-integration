@@ -114,7 +114,7 @@ function getBundledPathCommand(
 		case TypeOfCommand.ExtractPboDos:
 			return {
 				program: `${bundledPath}\\ExtractPboDos.exe`,
-				options: '',
+				options: '-KNR',
 				filePath: dir
 			};
 
@@ -128,7 +128,7 @@ function getBundledPathCommand(
 		case TypeOfCommand.Rapify:
 			return {
 				program: `${bundledPath}\\Rapify.exe`,
-				options: '',
+				options: '-N',
 				filePath: dir
 			};
 
