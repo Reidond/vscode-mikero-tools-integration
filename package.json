@@ -15,6 +15,58 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": [
+			{
+				"title": "Mikero Tools Configuration",
+				"properties": {
+					"vscode-mikero-tools-integration.useBundled": {
+						"type": "string",
+						"default": "MakePbo.exe",
+						"description": "Flag for using bundled version of old tools. This for best experience, because newer versions does not have some options"
+					},
+					"vscode-mikero-tools-integration.makePboPath": {
+						"type": "string",
+						"default": "MakePbo.exe",
+						"description": "Path to MakePbo executable. Default is from PATH"
+					},
+					"vscode-mikero-tools-integration.makePboOptions": {
+						"type": "string",
+						"default": "",
+						"description": "Options for MakePbo executable."
+					},
+					"vscode-mikero-tools-integration.extractPboDosPath": {
+						"type": "string",
+						"default": "ExtractPboDos.exe",
+						"description": "Path to ExtractPboDos executable. Default is from PATH"
+					},
+					"vscode-mikero-tools-integration.extractPboDosOptions": {
+						"type": "string",
+						"default": "",
+						"description": "Options for ExtractPboDos executable."
+					},
+					"vscode-mikero-tools-integration.deRapDosPath": {
+						"type": "string",
+						"default": "DeRapDos.exe",
+						"description": "Path to DeRapDos executable. Default is from PATH"
+					},
+					"vscode-mikero-tools-integration.deRapDosOptions": {
+						"type": "string",
+						"default": "",
+						"description": "Options for DeRapDos executable."
+					},
+					"vscode-mikero-tools-integration.RapifyPath": {
+						"type": "string",
+						"default": "Rapify.exe",
+						"description": "Path to Rapify executable. Default is from PATH"
+					},
+					"vscode-mikero-tools-integration.RapifyOptions": {
+						"type": "string",
+						"default": "",
+						"description": "Options for Rapify executable."
+					}
+				}
+			}
+		],
 		"commands": [
 			{
 				"command": "pboActions.makePbo",
@@ -93,5 +145,8 @@
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
 		"@types/mocha": "^2.2.42"
+	},
+	"dependencies": {
+		"node-powershell": "^4.0.0"
 	}
 }
