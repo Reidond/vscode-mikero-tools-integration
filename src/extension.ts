@@ -65,73 +65,40 @@ function runMikeroToolsFromPowershell(commandObj: Command) {
 		});
 }
 
-function getDefaultPathCommand(
+function getCommandToRun(
 	typeOfCommand: TypeOfCommand,
 	fsPath: string | undefined,
-	config: vscode.WorkspaceConfiguration
-): Command {
-	switch (typeOfCommand) {
-		case TypeOfCommand.MakePbo:
-			return { program: config.get('makePboPath'), options: config.get('makePboOptions'), fsPath: fsPath };
-
-		case TypeOfCommand.ExtractPboDos:
-			return {
-				program: config.get('extractPboDosPath'),
-				options: config.get('extractPboDosOptions'),
-				fsPath: fsPath
-			};
-
-		case TypeOfCommand.DeRapDos:
-			return {
-				program: config.get('deRapDosPath'),
-				options: config.get('deRapDosOptions'),
-				fsPath: fsPath
-			};
-
-		case TypeOfCommand.Rapify:
-			return {
-				program: config.get('rapifyPath'),
-				options: config.get('rapifyOptions'),
-				fsPath: fsPath
-			};
-
-		default:
-			return { program: undefined, options: undefined, fsPath: undefined };
-	}
-}
-
-function getBundledPathCommand(
-	typeOfCommand: TypeOfCommand,
-	fsPath: string | undefined,
-	context: vscode.ExtensionContext
+	config: vscode.WorkspaceConfiguration,
+	context: vscode.ExtensionContext,
+	isBundled: boolean = false
 ): Command {
 	const bundledPath = `${context.extensionPath}\\bin`;
 	switch (typeOfCommand) {
 		case TypeOfCommand.MakePbo:
 			return {
-				program: `${bundledPath}\\MakePbo.exe`,
-				options: '-X none -U',
+				program: !isBundled ? config.get('makePboPath') : `${bundledPath}\\MakePbo.exe`,
+				options: !isBundled ? config.get('makePboOptions') : config.get('bundledMakePboOptions'),
 				fsPath: fsPath
 			};
 
 		case TypeOfCommand.ExtractPboDos:
 			return {
-				program: `${bundledPath}\\ExtractPboDos.exe`,
-				options: '-KNR',
+				program: !isBundled ? config.get('extractPboDosPath') : `${bundledPath}\\ExtractPboDos.exe`,
+				options: !isBundled ? config.get('extractPboDosOptions') : config.get('bundledExtractPboDosOptions'),
 				fsPath: fsPath
 			};
 
 		case TypeOfCommand.DeRapDos:
 			return {
-				program: `${bundledPath}\\DeRapDos.exe`,
-				options: '',
+				program: !isBundled ? config.get('deRapDosPath') : `${bundledPath}\\DeRapDos.exe`,
+				options: !isBundled ? config.get('deRapDosOptions') : config.get('bundledDeRapDosOptions'),
 				fsPath: fsPath
 			};
 
 		case TypeOfCommand.Rapify:
 			return {
-				program: `${bundledPath}\\Rapify.exe`,
-				options: '-N',
+				program: !isBundled ? config.get('rapifyPath') : `${bundledPath}\\Rapify.exe`,
+				options: !isBundled ? config.get('rapifyOptions') : config.get('bundledRapifyOptions'),
 				fsPath: fsPath
 			};
 
@@ -147,7 +114,7 @@ function checkIfUsingBundled(
 	config: vscode.WorkspaceConfiguration
 ): Command {
 	if (config.get('useBundled') === true) {
-		return getBundledPathCommand(typeOfCommand, fsPath, context);
+		return getCommandToRun(typeOfCommand, fsPath, config, context, true);
 	}
-	return getDefaultPathCommand(typeOfCommand, fsPath, config);
+	return getCommandToRun(typeOfCommand, fsPath, config, context);
 }
