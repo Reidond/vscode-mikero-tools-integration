@@ -4,6 +4,6 @@ All notable changes to the "vscode-mikero-tools-integration" extension will be d
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [1.0.0] - 2019-07-06
 
 - Initial release

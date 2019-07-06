@@ -7,9 +7,6 @@ This extension add context menu actions for Mikero Tools. Super useful when you 
 ## Requirements
 
 * Windows
-* Mikero Tools in PATH
-
-## Extension Settings
 
 ## Known Issues
 
@@ -17,6 +14,4 @@ This extension add context menu actions for Mikero Tools. Super useful when you 
 
 ## Release Notes
 
-### 1.0.0
-
-Initial release of vscode-mikero-tools-integration
+See [CHANGELOG.md](CHANGELOG.md)
