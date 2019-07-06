@@ -2,19 +2,19 @@
 	"name": "vscode-mikero-tools-integration",
 	"displayName": "VSCode Mikero Tools Integration",
 	"description": "Integrate mikero tools into VSCode and do not leave your editor no more",
-	"version": "0.0.2",
+	"version": "1.0.1",
 	"engines": {
 		"vscode": "^1.35.0"
 	},
-	"categories": [
-		"Other"
-	],
+	"categories": [ "Other" ],
 	"activationEvents": [
 		"onCommand:pboActions.makePbo",
 		"onCommand:pboActions.extractPboDos",
 		"onCommand:configActions.deRapDos",
 		"onCommand:configActions.rapify"
 	],
+	"publisher": "Reidond",
+	"repository": "https://github.com/Reidond/vscode-mikero-tools-integration",
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": [
