@@ -2,7 +2,7 @@
 	"name": "vscode-mikero-tools-integration",
 	"displayName": "VSCode Mikero Tools Integration",
 	"description": "Integrate mikero tools into VSCode and do not leave your editor no more",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"engines": {
 		"vscode": "^1.35.0"
 	},
@@ -36,6 +36,11 @@
 						"default": "",
 						"description": "Options for MakePbo executable."
 					},
+					"vscode-mikero-tools-integration.bundledMakePboOptions": {
+						"type": "string",
+						"default": "-X none -U",
+						"description": "Options for bundled MakePbo executable."
+					},
 					"vscode-mikero-tools-integration.extractPboDosPath": {
 						"type": "string",
 						"default": "ExtractPboDos.exe",
@@ -45,6 +50,11 @@
 						"type": "string",
 						"default": "",
 						"description": "Options for ExtractPboDos executable."
+					},
+					"vscode-mikero-tools-integration.bundledExtractPboDosOptions": {
+						"type": "string",
+						"default": "-KNR",
+						"description": "Options for bundled ExtractPboDos executable."
 					},
 					"vscode-mikero-tools-integration.deRapDosPath": {
 						"type": "string",
@@ -56,6 +66,11 @@
 						"default": "",
 						"description": "Options for DeRapDos executable."
 					},
+					"vscode-mikero-tools-integration.bundledDeRapDosOptions": {
+						"type": "string",
+						"default": "",
+						"description": "Options for bundled DeRapDos executable."
+					},
 					"vscode-mikero-tools-integration.rapifyPath": {
 						"type": "string",
 						"default": "Rapify.exe",
@@ -65,6 +80,11 @@
 						"type": "string",
 						"default": "",
 						"description": "Options for Rapify executable."
+					},
+					"vscode-mikero-tools-integration.bundledRapifyOptions": {
+						"type": "string",
+						"default": "-N",
+						"description": "Options for bundled Rapify executable."
 					}
 				}
 			}
